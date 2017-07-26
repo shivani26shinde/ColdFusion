@@ -1,11 +1,14 @@
-<cfscript>
-	myPortfolio = [];
-	arrayAppend(myPortfolio,{title='Cool Website',website='http://www.website1.com',image='portfolio1.png',description='The Coolest Website'});
-	arrayAppend(myPortfolio,{title='Great Website',website='http://www.website2.com',image='portfolio2.png',description='A truly Great Website'});
-	arrayAppend(myPortfolio,{title='Awesome Website',website='http://www.website3.com',image='portfolio3.png',description='The most Awesome Website'});
-	arrayAppend(myPortfolio,{title='So So Website',website='http://www.website4.com',image='portfolio4.png',description='Not my best work'});
-	arrayAppend(myPortfolio,{title='Award Winning Website',website='http://www.website5.com',image='portfolio5.png',description='This website could win awards'});
-</cfscript>
+<cfquery name="myPortfolio" datasource="learncfinaweek">
+	SELECT
+		title,
+		summary,
+		website,
+		image
+	FROM
+		portfolio
+	ORDER BY
+		title
+</cfquery>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -103,17 +106,17 @@
 							<ul id="portfolio-list">
 								<!-- Start Portfolio -->
 								<cfoutput>
-									<cfloop array="#myPortfolio#" index="portfolio">
+									<cfloop query="myPortfolio">
 										<li>
 											<div class="left">
-												<a href="#portfolio.website#" title="#portfolio.title#" class="viewDetail ">
-													<img src="assets/images/portfolio/#portfolio.image#"   alt=" " border="0" />
-													<h5>#portfolio.title#</h5>
+												<a href="#myPortfolio.website#" title="#myPortfolio.title#" class="viewDetail ">
+													<img src="assets/images/portfolio/#myPortfolio.image#"   alt=" " border="0" />
+													<h5>#myPortfolio.title#</h5>
 												</a>
 											</div>
 											<div class="right">
 												<p>
-													#portfolio.description#
+													#myPortfolio.summary#
 												</p>
 											</div>
 										</li>  

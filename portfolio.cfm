@@ -1,4 +1,4 @@
-<cfquery name="myPortfolio" datasource="learncfinaweek">
+<cfquery name="myPortfolio">
 	SELECT
 		title,
 		summary,

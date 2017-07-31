@@ -1,4 +1,4 @@
-<cfquery name="myBlog" datasource="learncfinaweek">
+<cfquery name="myBlog">
 	SELECT
 		title,
 		summary,

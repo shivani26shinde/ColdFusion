@@ -1,4 +1,4 @@
-<cfquery name="mySkillSet" datasource="learncfinaweek">
+<cfquery name="mySkillSet">
 	SELECT
 		name
 	FROM
@@ -6,7 +6,7 @@
 	ORDER BY
 		name DESC
 </cfquery>
-<cfquery name="myResume" datasource="learncfinaweek">
+<cfquery name="myResume">
 	SELECT
 		title,
 		startDate,

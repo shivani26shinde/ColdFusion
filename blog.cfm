@@ -1,11 +1,4 @@
-<cfquery name="myBlog">
-	SELECT
-		title,
-		summary,
-		datePosted
-	FROM
-		post
-</cfquery>
+<cfset blogPosts = Entityload('BlogPost') />
 <cfimport taglib="customTags/" prefix="layout" />
 <layout:page section="blog">  		
 <!-- Content Start -->
@@ -30,19 +23,21 @@
 				<div class="clr">
 					<div class="left">
 						<!-- Blog Posts -->
-						<cfoutput query="myBlog">
-							<!-- Start Blog Post -->
-							<h5>
-								<span>#dateFormat(myBlog.datePosted,"mm/dd/yyyy")# </span>
-							</h5>
-							<h2>
-								<a href="blogpost.cfm?id=">#myBlog.title#</a>
-							</h2>
-							<p>#myBlog.summary#</p>
-							<p class="summary">
-								<strong>Categories:</strong> ColdFusion <strong>Comments:</strong> 12
-							</p>
-							<!-- End Blog Post -->
+						<cfoutput>
+							<cfloop array="#blogPosts#" index="blogPost">
+								<!-- Start Blog Post -->
+								<h5>
+									<span>#dateFormat(blogPost.datePosted,"mm/dd/yyyy")# </span>
+								</h5>
+								<h2>
+									<a href="blogpost.cfm?id=#blogPost.id#">#blogPost.title#</a>
+								</h2>
+								<p>#blogPost.summary#</p>
+								<p class="summary">
+									<strong>Categories:</strong> #blogPost.CategoryNames# <strong>Comments:</strong> #arrayLen(blogPost.getComments())#
+								</p>
+								<!-- End Blog Post -->
+							</cfloop>
 						</cfoutput>
 					</div>
 					<div class="right" >

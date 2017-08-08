@@ -57,6 +57,15 @@
 									<p>You did not provide all the required information!</p>
 								<cfelse>
 									<p>Form submitted successfully!</p>
+									<cfmail from="#form.email#" to="me@domain.com" subject="Contact Request" type="html">
+										<h2>Contact Request</h2>
+										<p>
+											From: #form.contactName# (#form.email#)
+										</p>	
+										<p>
+											#form.message#
+										</p>
+									</cfmail>	
 								</cfif>	
 							</cfif>								
 							<div id="post_message" class="post_message"></div>

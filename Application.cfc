@@ -11,6 +11,9 @@
 		cfclocation="com/entity"
 		};
 	this.invokeImplicitAccessor=true;
+	this.sessionCookie.httpOnly=true;
+	this.sessionCookie.timeout='10';
+	this.sessionCookie.disableupdate=true;
 	
 	function onApplicationStart(){
 		application.myName='Simon';

@@ -1,3 +1,8 @@
+<cfparam name="form.submitted" default="0" />
+<cfparam name="form.contactname" default="" />
+<cfparam name="form.email" default="" />
+<cfparam name="form.message" default="" />
+
 <cfset contactInfo = {address='123 A Street', phonenumber='(919) 555- 3228', email='simon@simonfree.com', skype='mySkypeName'} />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -96,29 +101,52 @@
 								<div id="respond">
 									<h2>Drop me a line</h2>
 									<p>Your email address will not be published. Required fields are marked *</p>		
-									<!-- Message Output -->								
+									<!-- Message Output -->	
+									<cfif form.submitted>
+										<cfset ok = true />
+										
+										<cfif not len(trim(form.contactname))>
+											<cfset ok = false />
+										</cfif>
+										
+										<cfif not len(trim(form.email))>
+											<cfset ok = false />
+										</cfif>	
+										
+										<cfif not len(trim(form.message))>
+											<cfset ok = false />
+										</cfif>		
+										
+										<cfif !ok>
+											<p>You did not provide all the required information!</p>
+										<cfelse>
+											<p>Form submitted successfully!</p>
+										</cfif>	
+									</cfif>								
 									<div id="post_message" class="post_message"></div>
 									
 									<div class="boxBody">			  
 										<div class="desc">
-
-											<form id="form" action="#" method="post">
-												<div>
-													<label>Name <span class="font-11">(required)</span></label>
-													<input name="contactname" type="text" class="required" />
-												</div>
-												<div>
-													<label>E-mail <span class="font-11">(required)</span></label>				
-													<input name="email" type="text" class="required email" />		
-												</div>
-												<div class="textarea">
-													<label>Message <span class="font-11">(required)</span></label>				
-													<textarea name="message" rows="6" cols="60" class="required"></textarea>		
-												</div>
-												<div>
-													<input id="submitBtn" value="Submit"  name="submit" type="submit" class="submitBtn" />
-												</div>
-											</form>	
+											<cfoutput>
+												<form id="form" action="contact.cfm" method="post">
+													<div>
+														<label>Name <span class="font-11">(required)</span></label>
+														<input name="contactname" type="text" class="required" value="#form.contactname#"/>
+													</div>
+													<div>
+														<label>E-mail <span class="font-11">(required)</span></label>				
+														<input name="email" type="text" class="required email" value="#form.email#"/>		
+													</div>
+													<div class="textarea">
+														<label>Message <span class="font-11">(required)</span></label>				
+														<textarea name="message" rows="6" cols="60" class="required">#form.message#</textarea>		
+													</div>
+													<div>
+														<input id="submitBtn" value="Submit"  name="submit" type="submit" class="submitBtn" />
+													</div>
+													<input type="hidden" name="submitted" value="1" />
+												</form>	
+											</cfoutput>
 										</div><!--END desc show--> 
 									<!--END desc-->	
 									</div>					

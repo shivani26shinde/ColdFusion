@@ -1,3 +1,11 @@
+<cfscript>
+	myPortfolio = [];
+	arrayAppend(myPortfolio,{title='Cool Website',website='http://www.website1.com',image='portfolio1.png',description='The Coolest Website'});
+	arrayAppend(myPortfolio,{title='Great Website',website='http://www.website2.com',image='portfolio2.png',description='A truly Great Website'});
+	arrayAppend(myPortfolio,{title='Awesome Website',website='http://www.website3.com',image='portfolio3.png',description='The most Awesome Website'});
+	arrayAppend(myPortfolio,{title='So So Website',website='http://www.website4.com',image='portfolio4.png',description='Not my best work'});
+	arrayAppend(myPortfolio,{title='Award Winning Website',website='http://www.website5.com',image='portfolio5.png',description='This website could win awards'});
+</cfscript>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -94,46 +102,24 @@
 						<div>
 							<ul id="portfolio-list">
 								<!-- Start Portfolio -->
-								<li>
-									<div class="left">
-										<a href="/" title="Project description" class="viewDetail ">
-											<img src="assets/images/portfolio/portfolio1.png"   alt=" " border="0" />
-											<h5>Project Title 1</h5>
-										</a>
-									</div>
-									<div class="right">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nisi erat, ornare vehicula convallis at, viverra quis sapien. Ut gravida risus in eros semper quis eleifend erat aliquet. Duis tincidunt urna sed quam tempus imperdiet. Aenean in cursus odio. Fusce ornare, elit vel malesuada commodo.
-										</p>
-									</div>
-								</li>    
+								<cfoutput>
+									<cfloop array="#myPortfolio#" index="portfolio">
+										<li>
+											<div class="left">
+												<a href="#portfolio.website#" title="#portfolio.title#" class="viewDetail ">
+													<img src="assets/images/portfolio/#portfolio.image#"   alt=" " border="0" />
+													<h5>#portfolio.title#</h5>
+												</a>
+											</div>
+											<div class="right">
+												<p>
+													#portfolio.description#
+												</p>
+											</div>
+										</li>  
+									</cfloop>  
+								</cfoutput>
 								<!-- End Portfolio -->
-								<li>
-									<div class="left">
-										<a href="/" title="Project description" class="viewDetail ">
-											<img src="assets/images/portfolio/portfolio2.png" alt=" " border="0" />
-											<h5>Project Title 2</h5>
-										</a>
-									</div>
-									<div class="right">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nisi erat, ornare vehicula convallis at, viverra quis sapien. Ut gravida risus in eros semper quis eleifend erat aliquet. Duis tincidunt urna sed quam tempus imperdiet. Aenean in cursus odio. Fusce ornare, elit vel malesuada commodo.
-										</p>
-									</div>
-								</li>
-								<li>
-									<div class="left">
-										<a href="/" title="Project description" class="viewDetail ">
-											<img src="assets/images/portfolio/portfolio3.png" alt=" " border="0" />
-											<h5>Project Title 3</h5> 
-										</a>
-									</div>
-									<div class="right">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nisi erat, ornare vehicula convallis at, viverra quis sapien. Ut gravida risus in eros semper quis eleifend erat aliquet. Duis tincidunt urna sed quam tempus imperdiet. Aenean in cursus odio. Fusce ornare, elit vel malesuada commodo.
-										</p>
-									</div>
-								</li>
 							</ul>
 						</div>
 						<!-- demowrap end-->       

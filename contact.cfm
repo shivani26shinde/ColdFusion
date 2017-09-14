@@ -4,6 +4,7 @@
 <cfparam name="form.message" default="" />
 
 <cfset contactInfo = {address='123 A Street', phonenumber='(919) 555- 3228', email='simon@simonfree.com', skype='mySkypeName'} />
+<cfhttp url="https://api.twitter.com/1/statuses/user_timeline.xml?&count=5&screen_name=simonfree" method="get" result="twitterFeed" /> 
 <cfimport taglib="customTags/" prefix="layout" />
 <layout:page section="contact"> 		
 <!-- Content Start -->
@@ -57,6 +58,15 @@
 									<p>You did not provide all the required information!</p>
 								<cfelse>
 									<p>Form submitted successfully!</p>
+									<cfmail from="#form.email#" to="me@domain.com" subject="Contact Request" type="html">
+										<h2>Contact Request</h2>
+										<p>
+											From: #form.contactName# (#form.email#)
+										</p>	
+										<p>
+											#form.message#
+										</p>
+									</cfmail>	
 								</cfif>	
 							</cfif>								
 							<div id="post_message" class="post_message"></div>
@@ -111,8 +121,13 @@
 						<div class="twitter clr"> 
 							<!-- Twitter Output -->
 							<ul>
-								<li>
-								</li>
+								<cfoutput>
+									<cfloop array="#xmlParse(twitterFeed.fileContent).statuses.status#" index="feedItem">
+									<li>
+										#dateFormat(feedItem.created_at.xmlText,'mm/dd/yyyy')# - #feedItem.text.xmlText#
+									</li>
+									</cfloop>
+								</cfoutput>
 							</ul>
 						</div>
 					</div>

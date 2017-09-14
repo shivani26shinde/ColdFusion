@@ -1,14 +1,19 @@
-<cfquery name="myPortfolio">
-	SELECT
-		title,
-		summary,
-		website,
-		image
-	FROM
-		portfolio
-	ORDER BY
-		title
-</cfquery>
+<cfset myPortfolio = cacheGet('myPortfolio') />
+<cfif isNull(myPortfolio)>
+	<cfquery name="myPortfolio">
+		SELECT
+			title,
+			summary,
+			website,
+			image
+		FROM
+			portfolio
+		ORDER BY
+			title
+	</cfquery>
+	<cfset cachePut('myPortfolio',myPortfolio) />
+</cfif>	
+
 <cfimport taglib="customTags/" prefix="layout" />
 <layout:page section="portfolio">		
 <!-- Content Start -->

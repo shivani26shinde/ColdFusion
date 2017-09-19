@@ -15,7 +15,6 @@
 	<cfset comment.author = form.author />
 	<cfset comment.comment = form.comment />
 	<cfset comment.createdDateTime = now() />
-	<cfset EntitySave(comment) />
 	<cfset blogPost.addComment(comment) />
 	<cfset EntitySave(blogPost) />
 </cfif>	
@@ -50,7 +49,7 @@
 								</h2>
 								<!-- Date Published -->
 								<h5>
-									<strong>Date Posted</strong>: #LSdateFormat(blogPost.dateposted,'short')#
+									<strong>Date Posted</strong>: #dateFormat(blogPost.dateposted,'mm/dd/yyyy')#
 								</h5>
 								<!-- Blog Body -->
 								#blogPost.body#
@@ -70,7 +69,7 @@
 										<cfloop array="#blogPost.getComments()#" index="comment">
 										<li>
 											<p>
-												<strong>Posted On:</strong> #LSdateFormat(comment.createdDateTime,'short')# at #LStimeFormat(comment.createdDateTime,'medium')# By #encodeForHTML(comment.author)#
+												<strong>Posted On:</strong> #dateFormat(comment.createdDateTime,'mm/dd/yyyy')# at #timeFormat(comment.createdDateTime,'short')# By #encodeForHTML(comment.author)#
 											</p>
 											<p>
 												#encodeForHTML(comment.comment)#
